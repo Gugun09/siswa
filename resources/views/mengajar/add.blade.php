@@ -39,16 +39,22 @@
                 		<div class="col-md-6">
 							<div class="form-group">
 								<label>Guru Mata Pelajaran</label>
-								<select name="guru" class="form-control">
+								<select name="id_user" class="form-control">
 									<option value="">- Pilih -</option>
+									@foreach($guru as $gurus)
+									<option value="{{ $gurus->id }}">{{ $gurus->name }}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Mata Pelajaran</label>
-								<select name="guru" class="form-control">
+								<select name="id_mapel" class="form-control">
 									<option value="">- Pilih -</option>
+									@foreach($mapel as $mapels)
+									<option value="{{ $mapels->id }}">{{ $mapels->mapel }}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
@@ -86,9 +92,11 @@
 							</div>
 							<div class="col-md-6">	
 									<label>Kelas</label>
-								<select name="kelas" class="form-control">
+								<select name="id_kelas" class="form-control">
 									<option value="">- Pilih -</option>
-									
+									@foreach($kelas as $kelass)
+									<option value="{{ $kelass->id }}">{{ $kelass->nama_kelas }}</option>
+									@endforeach
 								</select>
 
 

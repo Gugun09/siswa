@@ -47,3 +47,18 @@ Route::delete('/mapel/{id}/delete', [App\Http\Controllers\MapelController::class
 
 Route::get('/jadwal', [App\Http\Controllers\MengajarController::class, 'index'])->name('jadwal.index');
 Route::get('/jadwal/add', [App\Http\Controllers\MengajarController::class, 'create'])->name('jadwal.create');
+
+Route::get('/guru', [App\Http\Controllers\GuruController::class, 'index'])->name('guru.index');
+Route::get('/guru/add', [App\Http\Controllers\GuruController::class, 'create'])->name('guru.create');
+Route::post('/guru/store', [App\Http\Controllers\GuruController::class, 'store'])->name('guru.store');
+Route::get('/guru/{id}/edit', [App\Http\Controllers\GuruController::class, 'edit'])->name('guru.edit');
+Route::post('/guru/{id}/update', [App\Http\Controllers\GuruController::class, 'update'])->name('guru.update');
+Route::delete('/guru/{id}/delete', [App\Http\Controllers\GuruController::class, 'delete'])->name('guru.destroy');
+
+
+Route::get('/siswa', [App\Http\Controllers\SiswaController::class, 'index'])->name('siswa.index');
+Route::get('/siswa/add', [App\Http\Controllers\SiswaController::class, 'create'])->name('siswa.create');
+Route::post('/siswa/store', [App\Http\Controllers\SiswaController::class, 'store'])->name('siswa.store');
+Route::get('/siswa/{id}/edit', [App\Http\Controllers\SiswaController::class, 'edit'])->name('siswa.edit');
+Route::post('/siswa/{id}/update', [App\Http\Controllers\SiswaController::class, 'update'])->name('siswa.update');
+Route::delete('/siswa/{id}/delete', [App\Http\Controllers\SiswaController::class, 'delete'])->name('siswa.destroy');

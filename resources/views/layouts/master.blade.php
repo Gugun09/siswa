@@ -208,13 +208,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="{{ route('guru.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Guru</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{ route('guru.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Guru</p>
                 </a>
@@ -231,13 +231,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="{{ route('siswa.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Siswa</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{ route('siswa.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daftar Siswa</p>
                 </a>

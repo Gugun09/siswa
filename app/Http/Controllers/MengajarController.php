@@ -6,12 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Thajaran;
 use App\Models\Semester;
 use App\Models\Mengajar;
+use App\Models\User;
+use App\Models\Mapel;
+use App\Models\Kelas;
 
 class MengajarController extends Controller
 {
     public function index()
     {
     	$mengajar = Mengajar::all();
+        $guru = Guru::all();
     	return view('mengajar.index', compact('mengajar'));
     }
 
@@ -20,6 +24,9 @@ class MengajarController extends Controller
     	$thajaran = Thajaran::where(['status' => 1])->first();
     	// dd($thajaran['tahun_ajaran']);
     	$semester = Semester::where(['status' => 1])->first();
-    	return view('mengajar.add', compact('thajaran','semester'));
+        $guru = User::where('role','guru')->get();
+        $mapel = Mapel::all();
+        $kelas = Kelas::all();
+    	return view('mengajar.add', compact('thajaran','semester','guru','mapel','kelas'));
     }
 }
