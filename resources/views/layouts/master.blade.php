@@ -145,7 +145,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="{{ route('walas.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Wali Kelas</p>
                 </a>
@@ -254,10 +254,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                  @php $kelas = App\Models\Kelas::orderBy('nama_kelas', 'ASC')->get() @endphp
+                  @foreach($kelas as $kelass)
+                <a href="{{ $kelass->id }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Kelas</p>
+                  <p>Kelas {{ $kelass->nama_kelas }}</p>
                 </a>
+                  @endforeach
               </li>
             </ul>
           </li>

@@ -82,6 +82,7 @@ class SiswaController extends Controller
     public function delete($id)
     {
     	$user = User::findOrFail($id);
+     //    dd($user);
     	$user->destroy($id);
     	return redirect()->back();
     }

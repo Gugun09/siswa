@@ -15,7 +15,7 @@ class MengajarController extends Controller
     public function index()
     {
     	$mengajar = Mengajar::all();
-        $guru = Guru::all();
+        $guru =  User::where('role','guru')->get();
     	return view('mengajar.index', compact('mengajar'));
     }
 
@@ -28,5 +28,11 @@ class MengajarController extends Controller
         $mapel = Mapel::all();
         $kelas = Kelas::all();
     	return view('mengajar.add', compact('thajaran','semester','guru','mapel','kelas'));
+    }
+
+    public function store(Request $request)
+    {
+        Mengajar::create($request->all());
+        return redirect()->back();
     }
 }

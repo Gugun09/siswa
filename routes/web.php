@@ -45,8 +45,15 @@ Route::get('/mapel/{id}/edit', [App\Http\Controllers\MapelController::class, 'ed
 Route::post('/mapel/update', [App\Http\Controllers\MapelController::class, 'update'])->name('mapel.update');
 Route::delete('/mapel/{id}/delete', [App\Http\Controllers\MapelController::class, 'destroy'])->name('mapel.destroy');
 
+Route::get('/walas', [App\Http\Controllers\WalasController::class, 'index'])->name('walas.index');
+Route::post('/walas/store', [App\Http\Controllers\WalasController::class, 'store'])->name('walas.store');
+Route::get('/walas/{id}/edit', [App\Http\Controllers\WalasController::class, 'edit'])->name('walas.edit');
+Route::post('/walas/update', [App\Http\Controllers\WalasController::class, 'update'])->name('walas.update');
+Route::delete('/walas/{id}/delete', [App\Http\Controllers\WalasController::class, 'destroy'])->name('walas.destroy');
+
 Route::get('/jadwal', [App\Http\Controllers\MengajarController::class, 'index'])->name('jadwal.index');
 Route::get('/jadwal/add', [App\Http\Controllers\MengajarController::class, 'create'])->name('jadwal.create');
+Route::post('/jadwal/store', [App\Http\Controllers\MengajarController::class, 'store'])->name('jadwal.store');
 
 Route::get('/guru', [App\Http\Controllers\GuruController::class, 'index'])->name('guru.index');
 Route::get('/guru/add', [App\Http\Controllers\GuruController::class, 'create'])->name('guru.create');

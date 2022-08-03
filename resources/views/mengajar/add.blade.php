@@ -11,7 +11,8 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form action="{{ route('jadwal.store') }}" method="POST">
+              	@csrf
                 <div class="card-body">
                 	<div class="row">
                 		<div class="col-4">
@@ -53,7 +54,7 @@
 								<select name="id_mapel" class="form-control">
 									<option value="">- Pilih -</option>
 									@foreach($mapel as $mapels)
-									<option value="{{ $mapels->id }}">{{ $mapels->mapel }}</option>
+									<option value="{{ $mapels->id }}">[ {{$mapels->kode_mapel}} ] {{ $mapels->mapel }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -107,7 +108,7 @@
 							<div class="form-group">
 			                  <label>Waktu Mulai</label>
 			                    <div class="input-group date" id="waktu_mulai" data-target-input="nearest">
-			                        <input type="text" name="jam_awal" class="form-control datetimepicker-input" data-target="#waktu_mulai">
+			                        <input type="date" name="jam_awal" class="form-control datetimepicker-input" data-target="#waktu_mulai">
 			                        <div class="input-group-append" data-target="#waktu_mulai" data-toggle="datetimepicker">
 			                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
 			                        </div>
@@ -118,7 +119,7 @@
 							<div class="form-group">
 			                  <label>Waktu Selesai</label>
 			                    <div class="input-group date" id="waktu_selesai" data-target-input="nearest">
-			                        <input type="text" name="jam_akhir" class="form-control datetimepicker-input" data-target="#waktu_selesai">
+			                        <input type="date" name="jam_akhir" class="form-control datetimepicker-input" data-target="#waktu_selesai">
 			                        <div class="input-group-append" data-target="#waktu_selesai" data-toggle="datetimepicker">
 			                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
 			                        </div>
@@ -142,7 +143,7 @@
 @section('js')
 <script>
 	//Date and time picker
-    $('#waktu_mulai').datetimepicker({ icons: { time: 'far fa-clock' } });
-    $('#waktu_selesai').datetimepicker({ icons: { time: 'far fa-clock' } });
+    // $('#waktu_mulai').datetimepicker({ icons: { time: 'far fa-clock' } });
+    // $('#waktu_selesai').datetimepicker({ icons: { time: 'far fa-clock' } });
 </script>
 @endsection

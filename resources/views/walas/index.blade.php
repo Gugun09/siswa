@@ -12,8 +12,7 @@
               <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  <a href="{{ route('siswa.create') }}" class="btn btn-primary btn-sm">Tambah siswa</a>
-                  <!-- <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah">Tambah siswa</button> -->
+                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-tambah">Tambah</button>
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -22,11 +21,8 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>NIS/NISn</th>
-                    <th>Nama siswa</th>
                     <th>Kelas</th>
-                    <th>Tahun Masuk</th>
-                    <th>Status</th>
+                    <th>Nama Wali Kelas</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -34,18 +30,14 @@
                     @php
                     $no = 1;
                     @endphp
-                    @foreach($siswa as $siswas)
+                    @foreach($wali as $kelass)
                   <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $siswas->user->nip }}</td>
-                    <td>{{ $siswas->user->name }}</td>
-                    <td>{{ $siswas->kelas->nama_kelas }}</td>
-                    <td>{{ $siswas->th_angkatan }}</td>
-                    <td>{!! $siswas->status == 'Y' ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Tidak Aktif</span>' !!}</td>
+                    <td>{{ $kelass->kelas->nama_kelas }}</td>
+                    <td>{{ $kelass->user->name }}</td>
                     <td>
-                      <a href="{{ route('siswa.edit', $siswas->user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                      <!-- <button class="btn btn-warning btn-sm edit" id="{{ $siswas->id }}" data-toggle="modal" data-target="#modal-edit">Edit</button> -->
-                      <form action="{{ route('siswa.destroy', $siswas->user->id) }}" method="POST">
+                      <button class="btn btn-warning btn-sm edit" id="{{ $kelass->id }}" data-toggle="modal" data-target="#modal-edit">Edit</button>
+                      <form action="{{ route('walas.destroy', $kelass->id) }}" method="POST">
                         @method('delete')
                         @csrf
                         <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin?')">Delete</button>
@@ -60,21 +52,31 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title">Tambah Kelas</h4>
+                      <h4 class="modal-title">Tambah wali</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="{{ route('kelas.store') }}">
+                      <form method="POST" action="{{ route('walas.store') }}">
                         @csrf
                         <div class="form-group">
-                          <label>Kode Kelas</label>
-                          <input type="text" name="kd_kelas" class="form-control" value="KL-{{ time() }}" readonly>
+                          <label>Nama Guru</label>
+                          <select name="user_id" class="form-control">
+                            <option>Pilih Guru</option>
+                            @foreach($guru as $gurus)
+                            <option value="{{ $gurus->id }}">{{ $gurus->name }}</option>
+                            @endforeach
+                          </select>
                         </div>
                         <div class="form-group">
                           <label>Nama Kelas</label>
-                          <input type="text" name="nama_kelas" class="form-control" placeholder="Nama Kelas" required>
+                          <select name="kelas_id" class="form-control">
+                            <option>Pilih Kelas</option>
+                            @foreach($kelas as $kelass)
+                            <option value="{{ $kelass->id }}">{{ $kelass->nama_kelas }}</option>
+                            @endforeach
+                          </select>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -98,12 +100,26 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form method="POST" action="{{ route('kelas.update') }}">
+                      <form method="POST" action="{{ route('walas.update') }}">
                         @csrf
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
+                          <label>Nama Guru</label>
+                          <select name="user_id" class="form-control user_id">
+                            <option>Pilih Guru</option>
+                            @foreach($guru as $gurus)
+                            <option value="{{ $gurus->id }}">{{ $gurus->name }}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                        <div class="form-group">
                           <label>Nama Kelas</label>
-                          <input type="text" name="nama_kelas" id="nama_kelas" class="form-control" placeholder="Nama Kelas" required>
+                          <select name="kelas_id" class="form-control kelas_id">
+                            <option>Pilih Kelas</option>
+                            @foreach($kelas as $kelass)
+                            <option value="{{ $kelass->id }}">{{ $kelass->nama_kelas }}</option>
+                            @endforeach
+                          </select>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -155,15 +171,16 @@
       "responsive": true,
     });
   });
-
-  // $(document).on('click','.edit', function(e){
-  //   e.preventDefault();
-  //   id = $(this).attr('id');
-  //   $.get("" +'/kelas/' + id +'/edit', function (data) {
-  //         $('.edit-title').html("Edit Kelas");
-  //         $('#id').val(data.id);
-  //         $('#nama_kelas').val(data.nama_kelas);
-  //     })
-  // })
+  $(document).on('click','.edit', function(e){
+    e.preventDefault();
+    id = $(this).attr('id');
+    $.get("" +'/walas/' + id +'/edit', function (data) {
+          $('.edit-title').html("Edit Wali Kelas");
+          $('#id').val(data.id);
+          $('.user_id').val(data.user_id).prop('selected', true);
+          $('.kelas_id').val(data.kelas_id).prop('selected', true);
+          console.log(data)
+      })
+  })
 </script>
 @endsection
